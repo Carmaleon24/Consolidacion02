@@ -21,7 +21,7 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 20px;
-        width: 50%;
+        width: 80%;
         margin:auto;
         background-color: transparent;
         margin: 0 auto;
@@ -149,4 +149,43 @@
   font-weight: bold;
   color: #aaa;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+      width: 80%;
+  }
+ 
+
+#digimon-level-modal {
+  margin-top: 10px;
+  font-size: 15px;
+  background-color: transparent;
+}
+
+#digimon-info.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
+}
+
+.card-title {
+  margin-top: 10px;
+  font-size: 5px;
+  background-color: transparent;
+}
+
+#digimon-info.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: auto;
+}
+
 }

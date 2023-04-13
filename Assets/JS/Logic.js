@@ -62,14 +62,44 @@ fetch('https://digimon-api.vercel.app/api/digimon')
   })
   .catch(error => console.error(error));
 
+  ///
 
+  const input = document.getElementById('digimon-name');
+  const datalist = document.getElementById('digimon-list');
+
+  input.addEventListener('input', () => {
+    const inputValue = input.value.trim().toLowerCase();
+
+    if (inputValue.length < 2) {
+      // Si el usuario ha escrito menos de 2 caracteres, no mostramos sugerencias
+      datalist.innerHTML = '';
+      return;
+    }
+
+    fetch(`https://digimon-api.vercel.app/api/digimon?q=${inputValue}`)
+      .then(response => response.json())
+      .then(data => {
+        // Creamos un array con los nombres de los Digimon que hemos obtenido de la API
+        const digimonNames = data.map(digimon => digimon.name.toLowerCase());
+
+        // Creamos una lista de sugerencias
+        const suggestions = digimonNames
+          .filter(name => name.startsWith(inputValue))
+          .map(name => `<option value="${name}"></option>`)
+          .join('');
+
+        // Mostramos las sugerencias en la lista desplegable
+        datalist.innerHTML = suggestions;
+      })
+      .catch(error => console.error(error));
+  });
 
 
 
 ///
 
   function buscarDigimon() {
-    let digimonName = document.getElementById("digimon-name").value.toLowerCase();
+    let digimonName = document.getElementById("digimon-name").value;
     let apiUrl = "https://digimon-api.vercel.app/api/digimon/name/" + digimonName;
   
     fetch(apiUrl)
@@ -102,3 +132,5 @@ fetch('https://digimon-api.vercel.app/api/digimon')
   }
   
 ///
+
+
